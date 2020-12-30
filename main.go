@@ -26,9 +26,12 @@ func main() {
 
 	flag.Parse()
 
+	ilog := log.New(os.Stdout, "[info] ", log.LstdFlags|log.LUTC)
+	elog := log.New(os.Stderr, "[error] ", log.LstdFlags|log.LUTC)
+
 	out, err := exec.Command("zpool", "status", "-x").Output()
 	if err != nil {
-		log.Fatal(err)
+		elog.Fatal(err)
 	}
 
 	result := string(out)
@@ -38,8 +41,8 @@ func main() {
 
 	res, err := slack.PostAlert("```"+string(out)+"```", apiURL)
 	if err != nil {
-		log.Fatal(err)
+		elog.Fatal(err)
 	}
 
-	log.Println(res.Status)
+	ilog.Println(res.Status)
 }
