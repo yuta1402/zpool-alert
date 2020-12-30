@@ -35,7 +35,9 @@ func main() {
 	}
 
 	result := string(out)
-	if result == "all pools are healthy" {
+
+	if strings.Contains(result, "all pools are healthy") {
+		ilog.Println(result)
 		return
 	}
 
