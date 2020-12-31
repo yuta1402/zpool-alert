@@ -41,7 +41,7 @@ func main() {
 		return
 	}
 
-	res, err := slack.PostAlert("```"+string(out)+"```", apiURL)
+	res, err := slack.PostAlert(string(out), apiURL)
 	if err != nil {
 		elog.Fatal(err)
 	}

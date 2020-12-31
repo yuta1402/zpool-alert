@@ -11,8 +11,10 @@ type requestData struct {
 }
 
 func PostAlert(errorMessage string, apiURL string) (*http.Response, error) {
+	text := "```" + errorMessage + "```"
+
 	data := requestData{
-		Text: errorMessage,
+		Text: text,
 	}
 
 	json, err := json.Marshal(data)
